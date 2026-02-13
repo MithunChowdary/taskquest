@@ -1,0 +1,30 @@
+# Node.js
+**/node_modules
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Environment variables
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Production builds
+**/dist
+**/build
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Debug files
+**/build_debug.txt
+**/build_output.txt
+**/dev_output.txt
