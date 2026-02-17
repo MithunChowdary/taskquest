@@ -3,7 +3,7 @@ import Logo from './Logo';
 import config from '../config';
 
 const Auth = ({ onLogin }) => {
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(false);
     const [formData, setFormData] = useState({ username: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
