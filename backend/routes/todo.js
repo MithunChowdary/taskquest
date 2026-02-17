@@ -113,4 +113,17 @@ router.patch('/:id/toggle', async (req, res) => {
     }
 });
 
+// Delete a todo
+router.delete('/:id', async (req, res) => {
+    try {
+        const todo = await Todo.findById(req.params.id);
+        if (!todo) return res.status(404).json({ message: 'Todo not found' });
+
+        await Todo.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Todo deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;

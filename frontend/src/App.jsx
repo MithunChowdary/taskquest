@@ -169,6 +169,7 @@ function App() {
   const handleToggle = async (id, isDelete = false) => {
     try {
       if (isDelete) {
+        await fetch(`${API_BASE}/todos/${id}`, { method: 'DELETE' });
         setTasks(tasks.filter(t => t._id !== id));
         return;
       }

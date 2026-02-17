@@ -3,7 +3,8 @@ import Logo from './Logo';
 import config from '../config';
 
 const Auth = ({ onLogin }) => {
-    const [isLogin, setIsLogin] = useState(false);
+    // Default to Login (true) if they've been here before, otherwise Register (false)
+    const [isLogin, setIsLogin] = useState(localStorage.getItem('returningHero') === 'true');
     const [formData, setFormData] = useState({ username: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -33,6 +34,7 @@ const Auth = ({ onLogin }) => {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('userId', data.user.id);
+            localStorage.setItem('returningHero', 'true');
             onLogin(data.user);
         } catch (err) {
             setError(err.message);
