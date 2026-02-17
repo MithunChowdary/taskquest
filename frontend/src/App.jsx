@@ -81,19 +81,19 @@ function App() {
   useEffect(() => {
     if (user && user.totalScore !== undefined) {
       const currentLevel = calculateLevel(user.totalScore);
-      
+
       if (lastLeveledXP === null) {
         setLastLeveledXP(user.totalScore);
         return;
       }
 
       const prevLevel = calculateLevel(lastLeveledXP);
-      
+
       if (currentLevel > prevLevel) {
         setLevelToDisplay(currentLevel);
         setShowLevelUp(true);
       }
-      
+
       setLastLeveledXP(user.totalScore);
     }
   }, [user?.totalScore]);
@@ -320,9 +320,11 @@ function App() {
           <div className="order-2 lg:order-1 lg:flex-1 space-y-6 min-w-0">
             <section className={`backdrop-blur-3xl border p-8 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] min-h-[500px] transition-all ${theme === 'dark' ? 'bg-slate-900/40 border-white/10' : 'bg-white/80 border-orange-100'}`}>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                <h2 className={`text-3xl sm:text-4xl font-black ${theme === 'dark' ? 'text-white' : 'text-slate-900'} italic tracking-tighter flex items-center gap-3`}>
-                  <div className={`w-2.5 h-10 bg-orange-500 rounded-full`}></div>
-                  {activeTab === 'today' ? 'Current Quests' : activeTab === 'backlog' ? 'Quest Backlog' : activeTab === 'notes' ? 'Knowledge Base' : 'Hero Logbook'}
+                <h2 className={`text-3xl sm:text-4xl font-black ${theme === 'dark' ? 'text-white' : 'text-slate-900'} italic tracking-tighter flex items-center gap-3 max-w-[50%]`}>
+                  <div className={`w-2.5 self-stretch bg-orange-500 rounded-full`}></div>
+                  <span className="leading-[0.9] py-1">
+                    {activeTab === 'today' ? 'Current Quests' : activeTab === 'backlog' ? 'Quest Backlog' : activeTab === 'notes' ? <>Knowledge<br />Base</> : 'Hero Logbook'}
+                  </span>
                 </h2>
                 <div className={`flex flex-wrap sm:flex-nowrap gap-1 p-1 rounded-xl border ${theme === 'dark' ? 'bg-slate-950/50 border-white/5' : 'bg-orange-50/50 border-orange-100'}`}>
                   <button
