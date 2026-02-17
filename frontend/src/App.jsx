@@ -8,6 +8,7 @@ import Logo from './components/Logo';
 import Notes from './components/Notes';
 import SkeletonCard from './components/SkeletonCard';
 import ContributionMap from './components/ContributionMap';
+import LevelUpModal from './components/LevelUpModal';
 import config from './config';
 
 const API_BASE = config.API_BASE;
@@ -23,6 +24,24 @@ function App() {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editData, setEditData] = useState({ username: '', dailyTarget: 50 });
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [showLevelUp, setShowLevelUp] = useState(false);
+  const [levelToDisplay, setLevelToDisplay] = useState(1);
+  const [lastLeveledXP, setLastLeveledXP] = useState(null);
+
+  const calculateLevel = (xp) => {
+    if (xp < 100) return 1;
+    if (xp < 250) return 2;
+    if (xp < 500) return 3;
+    let level = 3;
+    let requirement = 250;
+    let step = 250;
+    while (xp >= (requirement + step)) {
+      requirement += step;
+      level++;
+      step = Math.floor(step * 1.5);
+    }
+    return level;
+  };
 
   const isToday = (dateString) => {
     if (!dateString) return false;
@@ -57,6 +76,27 @@ function App() {
     };
     init();
   }, []);
+
+  // Track Level Ups
+  useEffect(() => {
+    if (user && user.totalScore !== undefined) {
+      const currentLevel = calculateLevel(user.totalScore);
+      
+      if (lastLeveledXP === null) {
+        setLastLeveledXP(user.totalScore);
+        return;
+      }
+
+      const prevLevel = calculateLevel(lastLeveledXP);
+      
+      if (currentLevel > prevLevel) {
+        setLevelToDisplay(currentLevel);
+        setShowLevelUp(true);
+      }
+      
+      setLastLeveledXP(user.totalScore);
+    }
+  }, [user?.totalScore]);
 
   const fetchUser = async (userId) => {
     try {
@@ -251,21 +291,7 @@ function App() {
               <div className="text-right flex flex-col items-end">
                 <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1">
                   <span className={`text-[8px] sm:text-[10px] ${theme === 'dark' ? 'text-orange-400/60' : 'text-orange-400'} font-black uppercase tracking-widest leading-none`}>
-                    LVL {(() => {
-                      let xp = user.totalScore || 0;
-                      if (xp < 100) return 1;
-                      if (xp < 250) return 2;
-                      if (xp < 500) return 3;
-                      let level = 3;
-                      let requirement = 250;
-                      let step = 250;
-                      while (xp >= (requirement + step)) {
-                        requirement += step;
-                        level++;
-                        step = Math.floor(step * 1.5);
-                      }
-                      return level;
-                    })()}
+                    LVL {calculateLevel(user.totalScore || 0)}
                   </span>
                   <div className="flex items-center gap-1 bg-orange-500/10 px-1 sm:px-1.5 py-0.5 rounded-md border border-orange-500/20">
                     <span className="text-orange-500 text-[8px] sm:text-[10px] font-black italic">⚡ {user.currentStreak || 0}D</span>
@@ -480,6 +506,7 @@ function App() {
                 completedCount={completedCount}
                 totalCount={totalCount}
                 theme={theme}
+                totalXP={user.totalScore}
               />
               {todayTasks.length > 0 && (
                 <FeedbackSection score={completedCount} target={totalCount} tone={user.preferredTone} theme={theme} />
@@ -641,6 +668,15 @@ function App() {
             )}
           </div>
         </div>
+      )}
+      {/* Level Up Notification */}
+      {showLevelUp && (
+        <LevelUpModal
+          level={levelToDisplay}
+          tone={user.preferredTone}
+          theme={theme}
+          onClose={() => setShowLevelUp(false)}
+        />
       )}
     </div>
   );

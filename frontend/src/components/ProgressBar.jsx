@@ -1,11 +1,11 @@
 import React from 'react';
 
-const ProgressBar = ({ current, target, completedCount, totalCount, theme }) => {
+const ProgressBar = ({ current, target, completedCount, totalCount, theme, totalXP }) => {
     const percentage = totalCount > 0 ? Math.min(Math.round((completedCount / totalCount) * 100), 100) : 0;
 
     // Calculate level based on progressive XP curve
     const level = (() => {
-        let xp = current || 0;
+        let xp = totalXP || 0;
         if (xp < 100) return 1;
         if (xp < 250) return 2;
         if (xp < 500) return 3;
