@@ -2,8 +2,8 @@
 
 TaskQuest is a premium, gamified task management system designed to turn your daily to-do list into an epic quest. Build your streak, earn XP, and level up your productivity in a beautiful, high-performance interface.
 
-![TaskQuest Preview](<img width="806" height="953" alt="image" src="https://github.com/user-attachments/assets/bd92bd84-edbf-4795-a9ec-7575126a58ca" />
-)
+<img width="806" height="953" alt="image" src="https://github.com/user-attachments/assets/126f81c1-48d0-4638-9913-9210e25c6488" />
+
 
 ## ✨ Features
 
