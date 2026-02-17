@@ -323,7 +323,7 @@ function App() {
                 <h2 className={`text-3xl sm:text-4xl font-black ${theme === 'dark' ? 'text-white' : 'text-slate-900'} italic tracking-tighter flex items-center gap-3`}>
                   <div className={`w-2 h-10 bg-orange-500 rounded-full shrink-0`}></div>
                   <span className="leading-none">
-                    {activeTab === 'today' ? 'Current Quests' : activeTab === 'backlog' ? 'Quest Backlog' : activeTab === 'notes' ? 'Knowledge Base' : 'Hero Logbook'}
+                    {activeTab === 'today' ? 'Current Quests' : activeTab === 'backlog' ? 'Quest Backlog' : activeTab === 'notes' ? 'Notes' : 'Hero Logbook'}
                   </span>
                 </h2>
                 <div className={`flex flex-wrap sm:flex-nowrap gap-1 p-1 rounded-xl border ${theme === 'dark' ? 'bg-slate-950/50 border-white/5' : 'bg-orange-50/50 border-orange-100'}`}>

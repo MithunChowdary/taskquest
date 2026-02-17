@@ -9,7 +9,7 @@ TaskQuest is a premium, gamified task management system designed to turn your da
 - **🏹 Quest Management**: Categorize tasks by difficulty (Easy, Medium, Hard) and earn XP.
 - **📈 Hero Statistics**: Track your total XP, daily streaks, and success rates.
 - **📅 Interactive Contribution Map**: Visualize your productivity over the year.
-- **📓 Knowledge Base**: Secure your "wisdom" with a built-in notes system.
+- **📓 Notes**: Secure your "wisdom" with a built-in notes system.
 - **⚡ Dynamic Level System**: Level up with a celebratory popup as you cross XP thresholds.
 - **🎭 Coach Personalities**: Choose between Friendly, Neutral, or "Rude" AI coach feedback.
 - **🌙 Premium Dark Mode**: A stunning, high-contrast dark theme for late-night grinding.
